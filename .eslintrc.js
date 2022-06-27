@@ -56,6 +56,13 @@ module.exports = {
         tsx: "never",
       }, //import 시 확장자명은 사용하지 않는다.
     ],
+    "react/function-component-definition": [
+      2,
+      {
+        namedComponents: "arrow-function",
+        unnamedComponents: "arrow-function",
+      }
+    ]
   },
   settings: {
     "import/resolver": {
