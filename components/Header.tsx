@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import AirbnbLogoIcon from "../public/static/svg/logo/logo.svg";
@@ -58,9 +58,37 @@ const Container = styled.div`
       }
     }
   }
+
+  .modal-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    
+    .modal-background {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.75);
+      z-index: 10;
+    }
+    
+    .modal-contents {
+      width: 400px;
+      height: 400px;
+      background-color: white;
+      z-index: 11;
+    }
+  }
 `;
 
 const Header: React.FC = () => {
+  const [modalOpened, setModalOpened] = useState(false);
+
   return (
     <Container>
       <Link href="/">
@@ -70,13 +98,23 @@ const Header: React.FC = () => {
         </a>
       </Link>
       <div className="header-auth-buttons">
-        <button type="button" className="header-sign-up-button">
+        <button type="button" className="header-sign-up-button" onClick={() => setModalOpened(true)}>
           회원 가입
         </button>
         <button type="button" className="header-login-button">
           로그인
         </button>
       </div>
+      {modalOpened && (
+        <div className="modal-wrapper">
+          <div
+            className="modal-background"
+            role="presentation"
+            onClick={() => setModalOpened(false)}
+          />
+          <div className="modal-contents" />
+        </div>
+      )}
     </Container>
   );
 };
