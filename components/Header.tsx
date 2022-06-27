@@ -3,6 +3,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import AirbnbLogoIcon from "../public/static/svg/logo/logo.svg";
 import AirbnbLogoTextIcon from "../public/static/svg/logo/logo_text.svg";
+import palette from "../styles/palette";
 
 const Container = styled.div`
   position: sticky;
@@ -25,17 +26,57 @@ const Container = styled.div`
       margin-right: 6px;
     }
   }
+  
+  .header-auth-buttons {
+    .header-sign-up-button {
+      height: 42px;
+      margin-right: 8px;
+      padding: 0 16px;
+      border: 0;
+      border-radius: 21px;
+      background-color: white;
+      cursor: pointer;
+      outline: none;
+      
+      &:hover {
+        background-color: ${palette.gray_f7};
+      }
+    }
+    
+    .header-login-button {
+      height: 42px;
+      padding: 0 16px;
+      border: 0;
+      box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.18);
+      border-radius: 21px;
+      background-color: white;
+      cursor: pointer;
+      outline: none;
+      
+      &:hover {
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.12);
+      }
+    }
+  }
 `;
 
 const Header: React.FC = () => {
   return (
     <Container>
       <Link href="/">
-        <div className="header-logo-wrapper">
+        <a className="header-logo-wrapper">
           <AirbnbLogoIcon className="header-logo" />
           <AirbnbLogoTextIcon />
-        </div>
+        </a>
       </Link>
+      <div className="header-auth-buttons">
+        <button type="button" className="header-sign-up-button">
+          회원 가입
+        </button>
+        <button type="button" className="header-login-button">
+          로그인
+        </button>
+      </div>
     </Container>
   );
 };
