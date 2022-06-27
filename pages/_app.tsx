@@ -9,6 +9,7 @@ const app = ({ Component, pageProps }: AppProps) => {
       <Header />
       <GlobalStyle />
       <Component {...pageProps} />
+      <div id="root-modal" />
     </>
   );
 };
