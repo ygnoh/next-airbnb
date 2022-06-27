@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import AirbnbLogoIcon from "../public/static/svg/logo/logo.svg";
 import AirbnbLogoTextIcon from "../public/static/svg/logo/logo_text.svg";
 import palette from "../styles/palette";
-import ModalPortal from "./ModalPortal";
 import SignUpModal from "./SignUpModal";
+import useModal from "../hooks/useModal";
 
 const Container = styled.div`
   position: sticky;
@@ -63,7 +63,7 @@ const Container = styled.div`
 `;
 
 const Header: React.FC = () => {
-  const [modalOpened, setModalOpened] = useState(false);
+  const { openModal, ModalPortal } = useModal();
 
   return (
     <Container>
@@ -74,18 +74,16 @@ const Header: React.FC = () => {
         </a>
       </Link>
       <div className="header-auth-buttons">
-        <button type="button" className="header-sign-up-button" onClick={() => setModalOpened(true)}>
+        <button type="button" className="header-sign-up-button" onClick={openModal}>
           회원 가입
         </button>
         <button type="button" className="header-login-button">
           로그인
         </button>
       </div>
-      {modalOpened && (
-        <ModalPortal closePortal={() => setModalOpened(false)}>
-          <SignUpModal />
-        </ModalPortal>
-      )}
+      <ModalPortal>
+        <SignUpModal />
+      </ModalPortal>
     </Container>
   );
 };
